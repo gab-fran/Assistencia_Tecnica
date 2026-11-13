@@ -39,4 +39,7 @@ public class Equipamento {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean statusEquipamento = true;
 }
