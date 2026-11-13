@@ -12,6 +12,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface EquipamentoMapper {
 
@@ -22,6 +24,8 @@ public interface EquipamentoMapper {
     Equipamento toEntity(EquipamentoCreateDTO dto);
 
     EquipamentoResponseDTO toResponse(Equipamento equipamento);
+
+    List<EquipamentoResponseDTO> toResponseList(List<Equipamento> equipamentos);
 
     EquipamentoResumoDTO toResumo(Equipamento equipamento);
 

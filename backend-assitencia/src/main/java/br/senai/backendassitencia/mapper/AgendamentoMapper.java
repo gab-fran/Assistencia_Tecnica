@@ -4,6 +4,7 @@ import br.senai.backendassitencia.dto.agendamento.AgendamentoCreateDTO;
 import br.senai.backendassitencia.dto.agendamento.AgendamentoResponseDTO;
 import br.senai.backendassitencia.dto.agendamento.AgendamentoResumoDTO;
 import br.senai.backendassitencia.dto.agendamento.AgendamentoUpdateDTO;
+import br.senai.backendassitencia.dto.equipamento.EquipamentoResponseDTO;
 import br.senai.backendassitencia.entity.Agendamento;
 import br.senai.backendassitencia.entity.Equipamento;
 import org.mapstruct.BeanMapping;
@@ -11,6 +12,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring", uses = EquipamentoMapper.class)
 public interface AgendamentoMapper {
@@ -22,6 +25,8 @@ public interface AgendamentoMapper {
 	Agendamento toEntity(AgendamentoCreateDTO dto);
 
 	AgendamentoResponseDTO toResponse(Agendamento agendamento);
+
+    List<AgendamentoResponseDTO> toResponseList(List<Agendamento> agendamentos);
 
 	AgendamentoResumoDTO toResumo(Agendamento agendamento);
 
