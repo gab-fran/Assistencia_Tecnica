@@ -1,5 +1,6 @@
 package br.senai.backendassitencia.entity;
 
+import br.senai.backendassitencia.config.CpfConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -32,8 +33,13 @@ public class Cliente {
     private String email;
 
     @NotBlank(message = "O CPF é obrigatório")
-    @Column(nullable = false, length = 11, unique = true)
+    @Convert(converter = CpfConverter.class)
+    @Column(name = "cpf", length = 255, nullable = false)
     private String cpf;
+
+    @Column(name = "cpf_hash", length = 64, nullable = false, unique = true)
+    private String cpfHash;
+
 
     @NotBlank(message = "O celular é obrigatório")
     @Column(nullable = false, length = 11)

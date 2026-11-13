@@ -11,7 +11,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Page<Cliente> findByStatusClienteTrue(Pageable pageable);
     Optional<Cliente> findByIdClienteAndStatusClienteTrue(Integer id);
     Optional<Cliente> findByEmailAndStatusClienteTrue(String email);
-    Optional<Cliente> findByCpfAndStatusClienteTrue(String cpf);
-    boolean existsByCpf(String cpf);
+    Optional<Cliente> findByCpfHashAndStatusClienteTrue(String cpfHash);
+    boolean existsByCpfHash(String cpfHash);
     boolean existsByEmail(String email);
 }
