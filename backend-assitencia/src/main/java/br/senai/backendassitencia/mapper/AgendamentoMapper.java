@@ -40,6 +40,6 @@ public interface AgendamentoMapper {
         if (idEquipamento == null) {
             return null;
         }
-        return Equipamento.builder().idEquipamento(idEquipamento).build();
+        return Equipamento.builder().idEquipamento(idEquipamento).version(0L).build();
     }
 }

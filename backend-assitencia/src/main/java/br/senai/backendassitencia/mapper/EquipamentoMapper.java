@@ -40,6 +40,6 @@ public interface EquipamentoMapper {
         if (idCliente == null) {
             return null;
         }
-        return Cliente.builder().idCliente(idCliente).build();
+        return Cliente.builder().idCliente(idCliente).version(0L).build();
     }
 }

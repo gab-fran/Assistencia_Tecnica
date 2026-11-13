@@ -1,5 +1,6 @@
 package br.senai.backendassitencia.security;
 
+import br.senai.backendassitencia.filter.CorrelationIdFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor // Para injetar o JwtAuthenticationFilter
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final CorrelationIdFilter correlationIdFilter;
     private final JwtAuthenticationFilter jwtAuthFilter;
 
     @Bean
@@ -40,24 +42,24 @@ public class SecurityConfig {
                 // 3. Configuração de rotas
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // Libera apenas as rotas de login/cadastro (ajuste o caminho de acordo com o
-                        // seu Controller)
+                        // Libera apenas as rotas de login/cadastro
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers("/", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-                        // Todas as outras rotas exigem autenticação; as regras de cargo ficam nos
-                        // endpoints.
+                        // Todas as outras rotas exigem autenticação; as regras de cargo ficam nos endpoints.
                         .anyRequest().authenticated())
 
-                // Valida o JWT e carrega as authorities antes de autorizar as rotas.
+                // 4. Registra o filtro de Correlation ID antes do filtro de autenticação para rastreabilidade total
+                .addFilterBefore(correlationIdFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // 5. Valida o JWT e carrega as authorities antes de autorizar as rotas.
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // Bean necessário para que você consiga injetar o AuthenticationManager no seu
-    // Controller de Login
+    // Bean necessário para injetar o AuthenticationManager no Controller de Login
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
