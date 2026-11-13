@@ -11,6 +11,6 @@ public record AgendamentoResponseDTO(
         String descricao,
         SituacaoAgendamento situacaoAgendamento,
         EquipamentoResumoDTO equipamento,
-        Boolean statusEquipamento
+        Boolean statusAgendamento
 ) {
 }

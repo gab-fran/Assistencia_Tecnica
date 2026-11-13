@@ -8,7 +8,6 @@ public record AgendamentoUpdateDTO(
         LocalDateTime dataAgendamento,
         String descricao,
         SituacaoAgendamento situacaoAgendamento,
-        Integer idEquipamento,
-        Boolean statusEquipamento
+        Integer idEquipamento
 ) {
 }

@@ -13,8 +13,6 @@ public record ClienteUpdateDTO(
         String cpf,
 
         @Pattern(regexp = "\\d{11}", message = "O celular deve conter 11 dígitos")
-        String celular,
-
-        Boolean statusCliente
+        String celular
 ) {
 }
