@@ -38,5 +38,5 @@ public class Agendamento {
 
     @Builder.Default
     @Column(nullable = false, columnDefinition = "boolean default true")
-    private boolean statusEquipamento = true;
+    private boolean statusAgendamento = true;
 }

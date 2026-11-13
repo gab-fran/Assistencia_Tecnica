@@ -15,7 +15,7 @@ public class Equipamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEquipamento;
+    private Integer idEquipamento;
 
     @Version
     private Long version;
